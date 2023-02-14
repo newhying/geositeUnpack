@@ -54,17 +54,12 @@ def unpack_ip(_filepath):
 
 # 按间距中的绿色按钮以运行脚本。
 if __name__ == '__main__':
-    work = 0
-    for argv in sys.argv[1:]:
+    argvIter = iter(sys.argv)
+    next(argvIter)
+    while (argv := next(argvIter, None)):
         if (argv == '-site'):
-            work = 1
-        elif (argv == '-ip'):
-            work = 2
-        elif (work == 1):
-            unpack_site(argv)
-            work = 0
-        elif (work == 2):
-            unpack_ip(argv)
-            work = 0
+            unpack_site(next(argvIter, None))
+        if (argv == '-ip'):
+            unpack_ip(next(argvIter, None))
 
 # 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
